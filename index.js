@@ -17,6 +17,7 @@
     });
 
     var Package = require("./package.json"),
+        querystring = require("querystring"),
         AWS = require('aws-sdk'),
         mime = require("mime"),
         uuid = require("uuid").v4,
@@ -91,7 +92,7 @@
         var buffer = fs.createReadStream(file.path);
         var params = {
             ACL: "public-read",
-            Key: uuid() + "/" + file.originalFilename,
+            Key: uuid() + "/" + file.originalFilename.replace(/ /g, '_'),
             Body: buffer,
             ContentLength: buffer.length,
             ContentType: mime.lookup(file.name),
