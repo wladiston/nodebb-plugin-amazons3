@@ -32,8 +32,8 @@
     "compatibility": "^0.6.0"
   },
   "dependencies": {
-    "aws-sdk": "^2.0.23",
-    "uuid": "~1.4.1",
+    "aws-sdk": "~2.1.4",
+    "uuid": "~2.0.1",
     "mime": "~1.2.11",
     "fs": "0.0.2",
     "path": "~0.4.9"
