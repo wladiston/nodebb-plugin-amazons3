@@ -1,0 +1,43 @@
+{
+  "name": "nodebb-plugin-amazons3",
+  "version": "0.1.0",
+  "description": "A plugin for NodeBB to store files on Amazon Webservice S3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wladiston/nodebb-plugin-amazons3.git"
+  },
+  "keywords": [
+    "nodebb",
+    "s3",
+    "aws",
+    "plugin",
+    "module",
+    "upload"
+  ],
+  "author": "Wladiston Paiva <desenvolvedormg@gmail.com>",
+  "contributors": [
+    "Barış Soner Uşaklı <barisusakli@gmail.com>",
+    "Joseph Chen <joseph.chen@gmail.com>",
+    "Micheil Smith <micheil@kano.me>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wladiston/nodebb-plugin-amazons3/issues"
+  },
+  "nbbpm": {
+    "compatibility": "^0.6.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.0.23",
+    "uuid": "~1.4.1",
+    "mime": "~1.2.11",
+    "fs": "0.0.2",
+    "path": "~0.4.9"
+  },
+  "homepage": "https://github.com/wladiston/nodebb-plugin-amazons3",
+  "devDependencies": {}
+}

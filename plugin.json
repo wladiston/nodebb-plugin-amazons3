@@ -1,0 +1,15 @@
+{
+    "id": "nodebb-plugin-amazons3",
+    "name": "AmazonS3",
+    "description": "A plugin for who want to store your files on Amazon Webservice S3",
+    "url": "https://github.com/nodebb/nodebb-plugin-amazons3",
+    "library": "./index.js",
+    "templates": "templates",
+    "hooks": [
+        { "hook": "static:app.load", "method": "load" },
+        { "hook": "filter:uploadImage", "method": "uploadImage", "priority": 6 },
+        { "hook": "filter:uploadFile", "method": "uploadFile", "priority": 6 },
+        { "hook": "action:post.purge", "method": "delete" },
+        { "hook": "filter:admin.header.build", "method": "admin.menu" }
+    ]
+}
