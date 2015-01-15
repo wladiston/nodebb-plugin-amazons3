@@ -20,7 +20,6 @@
         querystring = require("querystring"),
         AWS = require('aws-sdk'),
         mime = require("mime"),
-        uuid = require("uuid").v4,
         fs = require('fs'),
         path = require('path'),
         util = require('util'),
@@ -65,7 +64,13 @@
 
         var imageData = type === 'file' ? fs.createReadStream(image.path) : image.url;
 
-        uploadToAmazon(image, callback);
+        var uploadType;
+        if(type === 'file')
+        {
+            uploadType = data.image.fieldName.replace("[]", "");
+        }
+
+        uploadToAmazon(data.uid + "/" + uploadType, image, callback);
     };
 
     AmazonS3.uploadFile = function (data, callback) {
@@ -85,14 +90,16 @@
             return callback(new Error('invalid file path'));
         }
 
-        uploadToAmazon(file, callback);
+        uploadToAmazon(data.uid + "/files", file, callback);
     };
 
-    function uploadToAmazon(file, callback) {
+    function uploadToAmazon(path, file, callback) {
         var buffer = fs.createReadStream(file.path);
+        var filename = file.originalFilename.replace(/[ \(\)]/g, '_');
+        var fullpath = "useruploads/" + path + "/";
         var params = {
             ACL: "public-read",
-            Key: uuid() + "/" + file.originalFilename.replace(/ /g, '_'),
+            Key: fullpath + filename,
             Body: buffer,
             ContentLength: buffer.length,
             ContentType: mime.lookup(file.name),
@@ -109,7 +116,7 @@
                 constants.config.bucket,
                 constants.config.host ? constants.config.host : "s3.amazonaws.com",
                 constants.config.path ? constants.config.path + "/" : "",
-                params.Key
+                fullpath + encodeURIComponent(filename)
             );
 
             callback(null, {
