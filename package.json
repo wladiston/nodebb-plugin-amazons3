@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-amazons3",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "A plugin for NodeBB to store files on Amazon Webservice S3",
   "main": "index.js",
   "scripts": {
