@@ -26,4 +26,4 @@ Just use this commands to configure your plugin:
     export AMAZONS3_HOST="your_host"
     export AMAZONS3_PATH="your_website_path"
 
-*** There is a bug in the Node v10.34 about certification [#8894](https://github.com/joyent/node/issues/8894) ***
+**There is a bug in the Node v10.34 about certification [#8894](https://github.com/joyent/node/issues/8894)**
