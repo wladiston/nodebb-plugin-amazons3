@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-amazons3",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A plugin for NodeBB to store files on Amazon Webservice S3",
   "main": "index.js",
   "scripts": {
@@ -32,10 +32,10 @@
     "compatibility": "^0.6.0"
   },
   "dependencies": {
-    "aws-sdk": "~2.1.4",
-    "mime": "~1.2.11",
+    "aws-sdk": "^2.1.6",
     "fs": "0.0.2",
-    "path": "~0.11.14"
+    "mime": "~1.2.11",
+    "path": "^0.11.14"
   },
   "homepage": "https://github.com/wladiston/nodebb-plugin-amazons3",
   "devDependencies": {}

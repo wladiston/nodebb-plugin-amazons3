@@ -89,6 +89,8 @@
             }
 
             constants.config.db = data;
+            updateSettings();
+
             log('info', 'Saved!');
             res.json('Saved!');
         });
@@ -102,6 +104,14 @@
             constants.config.db.accessKeyId &&
             constants.config.db.secretAccessKey);
     }
+
+    function updateSettings(){
+        s3bucket.config.update({
+            accessKeyId: constants.config.env.accessKeyId || constants.config.db.accessKeyId,
+            secretAccessKey: constants.config.env.secretAccessKey || constants.config.db.secretAccessKey
+        });
+    }
+
 
     plugin.exports = {
         load: function (params, callback) {
@@ -120,6 +130,8 @@
                     constants.config.db.bucket = result.bucket;
                     constants.config.db.host = result.host;
                     constants.config.db.path = result.path;
+
+                    updateSettings();
                 }
             });
 
