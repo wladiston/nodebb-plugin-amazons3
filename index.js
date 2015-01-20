@@ -9,7 +9,6 @@
         util = require('util'),
         posts = module.parent.require('./posts'),
         winston = module.parent.require('winston'),
-        s3bucket = new AWS.S3(),
         db = module.parent.require('./database'),
         constants = {
             'name': "AmazonS3",
@@ -33,7 +32,8 @@
                     path: ""
                 }
             }
-        };
+        },
+        s3bucket;
 
     function log(type, message) {
         winston.log(type, '[plugins/%s] %s', Package.name, message);
@@ -106,7 +106,7 @@
     }
 
     function updateSettings(){
-        s3bucket.config.update({
+        s3bucket = new AWS.S3({
             accessKeyId: constants.config.env.accessKeyId || constants.config.db.accessKeyId,
             secretAccessKey: constants.config.env.secretAccessKey || constants.config.db.secretAccessKey
         });
