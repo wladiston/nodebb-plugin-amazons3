@@ -57,19 +57,19 @@
             if (err) {
                 return callback(err);
             }
+        });
 
-            // Use protocol-less urls so that both HTTP and HTTPS work:
-            var url = util.format("//%s.%s/%s%s",
-                constants.config.env.bucket || constants.config.db.bucket,
-                constants.config.env.host || constants.config.db.host ? constants.config.env.host || constants.config.db.host : "s3.amazonaws.com",
-                constants.config.env.path || constants.config.db.path ? constants.config.env.path || constants.config.db.path + "/" : "",
-                fullpath + encodeURIComponent(filename)
-            );
+        // Use protocol-less urls so that both HTTP and HTTPS work:
+        var url = util.format("//%s.%s/%s%s",
+            constants.config.env.bucket || constants.config.db.bucket,
+            constants.config.env.host || constants.config.db.host ? constants.config.env.host || constants.config.db.host : "s3.amazonaws.com",
+            constants.config.env.path || constants.config.db.path ? constants.config.env.path || constants.config.db.path + "/" : "",
+            fullpath + encodeURIComponent(filename)
+        );
 
-            callback(null, {
-                name: file.name,
-                url: url
-            });
+        callback(null, {
+            name: file.name,
+            url: url
         });
     }
 
