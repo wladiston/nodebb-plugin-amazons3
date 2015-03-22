@@ -200,20 +200,23 @@
 
                     var regex = new RegExp(url.replace(/\./g, "\\.") + '([\\w-]||/)+\\.[\\w]+', 'g');
                     var path = content.match(regex);
-                    var files = path.map(function (a) { return { "Key": a.replace(url, "") }; });
-
-                    s3bucket.deleteObjects({
-                        Bucket: constants.config.env.bucket || constants.config.db.bucket,
-                        Delete: {
-                            Objects: files
-                        }
-                    }, function (err, data) {
-                        if (err) {
-                            log('error', err);
-                        }
-
-                        log('info', data);
-                    })
+                    
+                    if (path) {
+                        var files = path.map(function (a) { return { "Key": a.replace(url, "") }; });
+    
+                        s3bucket.deleteObjects({
+                            Bucket: constants.config.env.bucket || constants.config.db.bucket,
+                            Delete: {
+                                Objects: files
+                            }
+                        }, function (err, data) {
+                            if (err) {
+                                log('error', err);
+                            }
+    
+                            log('info', data);
+                        });
+                    }
                 }
             });
         },
