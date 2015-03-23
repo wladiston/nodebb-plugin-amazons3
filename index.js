@@ -4,6 +4,7 @@
     var Package = require("./package.json"),
         AWS = require('aws-sdk'),
         mime = require("mime"),
+        uuid = require("uuid").v4,
         fs = require('fs'),
         path = require('path'),
         util = require('util'),
@@ -41,7 +42,7 @@
 
     function uploadToAmazon(path, file, callback) {
         var buffer = fs.createReadStream(file.path);
-        var filename = file.originalFilename.replace(/[ \(\)]/g, '_');
+        var filename = uuid() + path.extname(file.originalFilename);
         var fullpath = "useruploads/" + path + "/";
         var params = {
             ACL: "public-read",
