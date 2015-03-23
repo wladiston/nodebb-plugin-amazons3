@@ -7,6 +7,7 @@
         uuid = require("uuid").v4,
         fs = require('fs'),
         path = require('path'),
+        async = require('async'),
         util = require('util'),
         posts = module.parent.require('./posts'),
         winston = module.parent.require('winston'),
@@ -42,7 +43,7 @@
 
     function uploadToAmazon(path, file, callback) {
         var buffer = fs.createReadStream(file.path);
-        var filename = uuid() + path.extname(file.originalFilename);
+        var filename = uuid() + '_' + file.originalFilename.replace(/[ \(\)]/g, '_');;
         var fullpath = "useruploads/" + path + "/";
         var params = {
             ACL: "public-read",
@@ -72,6 +73,35 @@
             name: file.name,
             url: url
         });
+
+        //async.series([
+        //        function(callback){
+        //            s3bucket.putObject(params, function (err) {
+        //                if (err) {
+        //                    return callback(err);
+        //                }
+        //                callback(null);
+        //            });
+        //        }
+        //    ],
+        //    function(err, results){
+        //        if (err) {
+        //            return callback(err);
+        //        }
+        //
+        //        // Use protocol-less urls so that both HTTP and HTTPS work:
+        //        var url = util.format("//%s.%s/%s%s",
+        //            constants.config.env.bucket || constants.config.db.bucket,
+        //            constants.config.env.host || constants.config.db.host ? constants.config.env.host || constants.config.db.host : "s3.amazonaws.com",
+        //            constants.config.env.path || constants.config.db.path ? constants.config.env.path || constants.config.db.path + "/" : "",
+        //            fullpath + encodeURIComponent(filename)
+        //        );
+        //
+        //        callback(null, {
+        //            name: file.name,
+        //            url: url
+        //        });
+        //    });
     }
 
     function save(settings, res, next) {
