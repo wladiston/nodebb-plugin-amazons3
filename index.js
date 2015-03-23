@@ -42,12 +42,12 @@
 
     function uploadToAmazon(path, file, callback) {
         var buffer = fs.createReadStream(file.path);
-        var filename = file.originalFilename.replace(/[ \(\)]/g, '_');
+        var filename = uuid() + path.extname(file.originalFilename);
         var fullpath = "useruploads/" + path + "/";
         var params = {
             ACL: "public-read",
             Bucket: constants.config.env.bucket || constants.config.db.bucket,
-            Key: fullpath + uuid() + path.extname(filename),
+            Key: fullpath + filename,
             Body: buffer,
             ContentLength: buffer.length,
             ContentType: mime.lookup(file.name),
