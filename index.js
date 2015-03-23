@@ -4,6 +4,7 @@
     var Package = require("./package.json"),
         AWS = require('aws-sdk'),
         mime = require("mime"),
+        uuid = require("uuid").v4,
         fs = require('fs'),
         path = require('path'),
         util = require('util'),
@@ -46,7 +47,7 @@
         var params = {
             ACL: "public-read",
             Bucket: constants.config.env.bucket || constants.config.db.bucket,
-            Key: fullpath + filename,
+            Key: fullpath + uuid() + path.extname(filename),
             Body: buffer,
             ContentLength: buffer.length,
             ContentType: mime.lookup(file.name),
