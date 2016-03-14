@@ -195,8 +195,13 @@
             var imageData = type === 'file' ? fs.createReadStream(image.path) : image.url;
 
             var uploadType;
-            if (type === 'file') {
+            winston.info(data);
+            if (type === 'file' && typeof data.image.fieldName != 'undefined') {
                 uploadType = data.image.fieldName.replace("[]", "");
+            }
+            if (data.image.name === 'profileCover'){
+                uploadType = 'profileCover'
+                data.image.originalFilename = 'coverImage.png'
             }
 
             uploadToAmazon(data.uid + "/" + uploadType, image, callback);
